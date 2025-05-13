@@ -220,57 +220,60 @@ else:
             #     )
             #     st.plotly_chart(fig, use_container_width=True)
 
+    st.markdown("---")
     st.markdown("##  Temperature Trends")
-    with st.expander("Temperature Analysis"):
-        col1, col2 = st.columns(2)
-        with col1:
-            fig = px.scatter(
-                filtered_df,
-                x='MaxTemp', y='MinTemp',
-                color='Location',
-                title="Max vs Min Temperature",
-                trendline="lowess"
-            )
-            st.plotly_chart(fig, use_container_width=True)
-        with col2:
-            fig = px.box(
-                filtered_df,
-                x='Location', y='MaxTemp',
-                title="Temperature Distribution by Location",
-                color='Location'
-            )
-            st.plotly_chart(fig, use_container_width=True)
+    # with st.expander("Temperature Analysis"):
+    col1, col2 = st.columns(2)
+    with col1:
+        fig = px.scatter(
+            filtered_df,
+            x='MaxTemp', y='MinTemp',
+            color='Location',
+            title="Max vs Min Temperature",
+            trendline="lowess"
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    with col2:
+        fig = px.box(
+            filtered_df,
+            x='Location', y='MaxTemp',
+            title="Temperature Distribution by Location",
+            color='Location'
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
+    st.markdown("---")
     st.markdown("##  Wind Analysis")
-    with st.expander("Wind Direction and Speed"):
-        col1, col2 = st.columns(2)
-        with col1:
-            fig = px.bar_polar(
-                filtered_df,
-                r="WindGustSpeed",
-                theta="WindGustDir",
-                color="Location",
-                title="Wind Gust Direction and Speed",
-                template="plotly_dark"
-            )
-            st.plotly_chart(fig, use_container_width=True)
-        with col2:
-            fig = px.histogram(
-                filtered_df,
-                x="WindDir3pm",
-                color="RainTomorrow",
-                title="Wind Direction at 3pm vs Rainfall Tomorrow",
-                barmode="group"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+    # with st.expander("Wind Direction and Speed"):
+    col1, col2 = st.columns(2)
+    with col1:
+        fig = px.bar_polar(
+            filtered_df,
+            r="WindGustSpeed",
+            theta="WindGustDir",
+            color="Location",
+            title="Wind Gust Direction and Speed",
+            template="plotly_dark"
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        
+    with col2:
+        fig = px.histogram(
+            filtered_df,
+            x="WindDir3pm",
+            color="RainTomorrow",
+            title="Wind Direction at 3pm vs Rainfall Tomorrow",
+            barmode="group"
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
 # Data summary section
 st.markdown("---")
-with st.expander(" Data Summary"):
-    st.dataframe(filtered_df.describe())
-    st.download_button(
-        label="Download Filtered Data (CSV)",
-        data=filtered_df.to_csv(index=False),
-        file_name="filtered_weather_data.csv",
-        mime="text/csv"
-    )
+# with st.expander(" Data Summary"):
+st.dataframe(filtered_df.describe())
+st.download_button(
+    label="Download Filtered Data (CSV)",
+    data=filtered_df.to_csv(index=False),
+    file_name="filtered_weather_data.csv",
+    mime="text/csv"
+)
