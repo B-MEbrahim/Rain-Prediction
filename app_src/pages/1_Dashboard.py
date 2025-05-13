@@ -221,6 +221,7 @@ else:
             #     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")
+    
     st.markdown("##  Temperature Trends")
     # with st.expander("Temperature Analysis"):
     col1, col2 = st.columns(2)
@@ -230,7 +231,8 @@ else:
             x='MaxTemp', y='MinTemp',
             color='Location',
             title="Max vs Min Temperature",
-            trendline="lowess"
+            trendline="lowess",
+            opacity=0.6  
         )
         st.plotly_chart(fig, use_container_width=True)
     with col2:
