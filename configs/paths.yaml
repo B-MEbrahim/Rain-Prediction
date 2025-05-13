@@ -11,8 +11,11 @@ data_paths:
   xg_processed_data_path: data\processed\xg_weatherAUS_processed.csv
   cleaned_data_path: data/processed/cleaned_data.csv
   test_data_path: data\processed\test_dataset.csv
+  cleaned_dahboard_data: data\processed\cleaned_rain_data.csv
    
 
 artifacts_paths:
   xg_model_path: models/xgboost_model.pkl
-  video_path: artifacts\video\Rain Predict.mp4
+  video_path: artifacts\videos\Rain Predict.mp4
+  style_path: artifacts\css\style.css
+  styles_path: artifacts\css\styles.css
