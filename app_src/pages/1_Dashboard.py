@@ -224,6 +224,12 @@ else:
     st.markdown("---")
     
     st.markdown("##  Temperature Trends")
+
+    # Generate consistent color map
+    locations = filtered_df['Location'].unique()
+    color_sequence = px.colors.qualitative.Plotly  # Or use other palettes
+    color_map = {loc: color_sequence[i % len(color_sequence)] for i, loc in enumerate(locations)}
+
     # with st.expander("Temperature Analysis"):
     col1, col2 = st.columns(2)
     with col1:
@@ -233,7 +239,8 @@ else:
             color='Location',
             title="Max vs Min Temperature",
             trendline="lowess",
-            opacity=0.4  
+            opacity=0.4,
+            color_discrete_map=color_map  
         )
         st.plotly_chart(fig, use_container_width=True)
     with col2:
@@ -242,7 +249,7 @@ else:
             fig.add_trace(go.Box(
                 y=filtered_df[filtered_df['Location'] == location]['MaxTemp'],
                 name=location,
-                marker=dict(color=px.colors.qualitative.Plotly[filtered_df['Location'].unique().tolist().index(location) % len(px.colors.qualitative.Plotly)]),
+                marker=dict(color=color_map[location]),
                 boxpoints=False  # Hide individual outlier points
             ))
 
