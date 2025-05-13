@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import yaml
 import plotly.express as px
+import plotly.graph_objects as go
 from streamlit_lottie import st_lottie
 import requests
 
@@ -232,15 +233,23 @@ else:
             color='Location',
             title="Max vs Min Temperature",
             trendline="lowess",
-            opacity=0.6  
+            opacity=0.4  
         )
         st.plotly_chart(fig, use_container_width=True)
     with col2:
-        fig = px.box(
-            filtered_df,
-            x='Location', y='MaxTemp',
+        fig = go.Figure()
+        for location in filtered_df['Location'].unique():
+            fig.add_trace(go.Box(
+                y=filtered_df[filtered_df['Location'] == location]['MaxTemp'],
+                name=location,
+                marker=dict(color=px.colors.qualitative.Plotly[filtered_df['Location'].unique().tolist().index(location) % len(px.colors.qualitative.Plotly)]),
+                boxpoints=False  # Hide individual outlier points
+            ))
+
+        fig.update_layout(
             title="Temperature Distribution by Location",
-            color='Location'
+            showlegend=True,
+            legend_title="Location"
         )
         st.plotly_chart(fig, use_container_width=True)
 
