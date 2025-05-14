@@ -265,15 +265,17 @@ else:
     # with st.expander("Wind Direction and Speed"):
     col1, col2 = st.columns(2)
     with col1:
-        fig = px.bar_polar(
-            filtered_df,
-            r="WindGustSpeed",
-            theta="WindGustDir",
-            color="Location",
-            title="Wind Gust Direction and Speed",
-            template="plotly_dark"
-        )
-        st.plotly_chart(fig, use_container_width=True)
+            fig = px.bar_polar(
+                filtered_df,
+                r="WindGustSpeed",
+                theta="WindGustDir",
+                color="Location",
+                title="Wind Gust Direction and Speed",
+                color_discrete_map=color_map,
+                start_angle=112,
+                template="presentation" # Other options include "plotly", "ggplot2", "seaborn", "simple_white", "none", 'xgridoff', 'presentation'.
+            )
+            st.plotly_chart(fig, use_container_width=True)
         
     with col2:
         fig = px.histogram(
