@@ -4,6 +4,7 @@ dirs:
   config_dir: confgs
   raw_data_dir: data/raw
   processed_data_dir: data/processed
+  fetched_data: data/fetched
   artifacts_dir: artifacts
 
 data_paths:
