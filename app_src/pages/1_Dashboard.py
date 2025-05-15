@@ -19,15 +19,19 @@ st.set_page_config(
 
 
 def correct_path(path_type, name):
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-    config_path = os.path.join(repo_root, "configs", "paths.yaml")
-
+    # Get the directory where the current script is located
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Navigate to the configs folder
+    config_path = os.path.join(current_dir, "..", "..", "configs", "paths.yaml")
+    config_path = os.path.normpath(config_path)
+    
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
 
     path = config[path_type][name]
-    full_path = os.path.join(repo_root, path.replace("\\", "/"))
-    return full_path
+    full_path = os.path.join(current_dir, "..", "..", path.replace("\\", "/"))
+    return os.path.normpath(full_path)
 
 
 # Load CSS and animations
