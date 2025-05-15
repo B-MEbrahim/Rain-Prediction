@@ -14,6 +14,7 @@ def load_lottieurl(url):
         return None
     return r.json()
 
+
 # Safe config path
 def correct_path(path_type, name):
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -116,8 +117,8 @@ with col1:
     Our models are trained on historical weather data and use cutting-edge techniques for forecasting weather patterns.
     """)
 
-    if st.button("Get Started →"):
-        st.query_params["page"] = "EDA"
+    # if st.button("Get Started →"):
+    #     st.query_params["page"] = "EDA"
 
 with col2:
     if hero_animation:
