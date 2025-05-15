@@ -11,3 +11,4 @@ PyYAML
 plotly
 streamlit
 streamlit_lottie
+statsmodels
