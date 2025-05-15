@@ -61,7 +61,7 @@ lottie_weather =  load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_
 # Load data
 @st.cache_data
 def load_data():
-    data_path = correct_path("data_paths", "cleaned_dahboard_data")
+    data_path = correct_path("data_paths", "cleaned_dashboard_data")
     df = pd.read_csv(data_path)
     if 'year' not in df.columns or 'month' not in df.columns:
         st.error("Columns 'year' and 'month' are required in your dataset.")
