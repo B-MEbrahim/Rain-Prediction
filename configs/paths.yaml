@@ -12,7 +12,7 @@ data_paths:
   xg_processed_data_path: data\processed\xg_weatherAUS_processed.csv
   cleaned_data_path: data/processed/cleaned_data.csv
   test_data_path: data\processed\test_dataset.csv
-  cleaned_dahboard_data: data\processed\cleaned_rain_data.csv
+  cleaned_dashboard_data: data\processed\cleaned_rain_data.csv
    
 
 artifacts_paths:
