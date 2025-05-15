@@ -1,2 +1,2 @@
 data/**/*.csv
-artifacts/videos/*.mp4
+#artifacts/videos/*.mp4
