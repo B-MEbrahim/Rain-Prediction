@@ -52,24 +52,6 @@ def load_lottieurl(url: str):
 lottie_weather =  load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_sk5h1kfn.json")
 
 
-# -------------- Header Section with Animation --------------
-header_col1, header_col2 = st.columns([1, 2])
-with header_col2:
-    if lottie_weather:
-        st_lottie(lottie_weather, height=250, key="weather")
-    else:
-        st.error("Could not load animation.")
-with header_col1:
-    st.markdown("""
-    <div style="font-size:1.2rem;">
-        Welcome to our rainfall prediction dashboard!  
-        Here you can learn more about our goals, our approach, and the tools behind this project.
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("---")
-
-
 # Load data
 @st.cache_data
 def load_data():
