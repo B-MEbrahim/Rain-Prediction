@@ -1,2 +1,3 @@
-data/**/*.csv
+data/processed/**/*.csv
+data/raw/**/*.csv
 #artifacts/videos/*.mp4
