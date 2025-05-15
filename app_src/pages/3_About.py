@@ -115,4 +115,5 @@ with contact_cols[0]:
 with contact_cols[1]:
     st.markdown("**GitHub**  \n[github.com/rain-prediction](https://github.com/B-MEbrahim/Rain-Prediction)")
 
-
+with contact_cols[2]:
+    st.markdown("**Kaggle**  \n[kaggle.com/rain-prediction](https://www.kaggle.com/code/mohamedmahmoud111/rain-prediction-porject)")
