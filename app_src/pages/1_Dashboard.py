@@ -195,6 +195,11 @@ lottie_weather = load_lottie_url("https://assets10.lottiefiles.com/packages/lf20
 if lottie_weather:
     st_lottie(lottie_weather, height=120, key="weather_intro")
 
+# Generate consistent color map
+locations = filtered_df['Location'].unique()
+color_sequence = px.colors.qualitative.Plotly  # Or use other palettes
+color_map = {loc: color_sequence[i % len(color_sequence)] for i, loc in enumerate(locations)}
+
 # Rainfall Section
 if filtered_df.empty:
     st.warning("No data matches your filters. Please adjust your selection.")
@@ -217,7 +222,8 @@ else:
                     filtered_df.groupby('Location')['Rainfall'].mean().reset_index(),
                     x='Location', y='Rainfall',
                     title="Average Rainfall by Location",
-                    color='Location'
+                    color='Location',
+                    color_discrete_map=color_map
                 )
                 st.plotly_chart(fig, use_container_width=True)
             with tab2:
@@ -225,6 +231,7 @@ else:
                     filtered_df.groupby(['month', 'Location'])['Rainfall'].mean().reset_index(),
                     x='month', y='Rainfall',
                     color='Location',
+                    color_discrete_map=color_map,
                     title="Monthly Rainfall Trends",
                     labels={'month': 'Month', 'Rainfall': 'Average Rainfall (mm)'}
                 )
@@ -241,10 +248,7 @@ else:
     
     st.markdown("##  Temperature Trends")
 
-    # Generate consistent color map
-    locations = filtered_df['Location'].unique()
-    color_sequence = px.colors.qualitative.Plotly  # Or use other palettes
-    color_map = {loc: color_sequence[i % len(color_sequence)] for i, loc in enumerate(locations)}
+    
 
     # with st.expander("Temperature Analysis"):
     col1, col2 = st.columns(2)
