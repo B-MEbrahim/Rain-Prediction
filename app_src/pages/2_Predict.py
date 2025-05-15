@@ -101,19 +101,23 @@ selected_day = selected_date.strftime("%d")
 def fetch_data():
     data_url = f"https://reg.bom.gov.au/climate/dwo/{selected_year}{selected_month}/text/{location_id[selected_location]}.{selected_year}{selected_month}.csv"
     try:
+        # Fetch the data
         response = requests.get(data_url, timeout=10)
         response.raise_for_status()
         
-        data_path = correct_path("dirs", "fetched_data")
-        os.makedirs(data_path, exist_ok=True)
-        file_path = os.path.join(data_path, f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
+        # Use temporary directory for writing files
+        temp_dir = "/tmp/weather_data"
+        os.makedirs(temp_dir, exist_ok=True)
+        file_path = os.path.join(temp_dir, f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
         
+        # Save the file
         with open(file_path, 'wb') as file:
             file.write(response.content)
+            
         return True
     except requests.exceptions.RequestException as e:
         st.error(f"Failed to download data: {str(e)}")
-        st.write(data_url)
+        st.write(f"Attempted URL: {data_url}")
         return False
     except Exception as e:
         st.error(f"Error processing data: {str(e)}")
@@ -122,8 +126,10 @@ def fetch_data():
 
 def prepare_csv():
     try:
-        data_path = os.path.join(correct_path("dirs", "fetched_data"), 
-                               f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
+        # Read from temporary directory instead
+        temp_dir = "/tmp/weather_data"
+        data_path = os.path.join(temp_dir, f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
+
         with open(data_path, 'r', encoding='latin1') as f:
             lines = f.readlines()
 
@@ -138,15 +144,20 @@ def prepare_csv():
         with open(data_path, 'w', encoding='latin1') as f:
             f.writelines(cleaned_lines)
         return True
+    except FileNotFoundError:
+        st.error("Data file not found. Please fetch data first.")
+        return None
     except Exception as e:
-        st.error(f"Error preparing CSV: {str(e)}")
-        return False
+        st.error(f"Error reading CSV: {str(e)}")
+        return None
 
 
 @st.cache_data
 def prepare_data():
     try:
-        data_path = os.path.join(correct_path("dirs", "fetched_data"), f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
+        temp_dir = "/tmp/weather_data"
+        data_path = os.path.join(temp_dir, f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
+
         df = pd.read_csv(data_path, encoding='latin1')
         df.drop(df.columns[0], axis=1, inplace=True)
         df['Location'] = selected_location 
@@ -209,8 +220,11 @@ def prepare_data():
         for col in cat_cols:
             df[col] = df[col].astype('category')
         return df
+    except FileNotFoundError:
+        st.error("Data file not found. Please fetch data first.")
+        return None
     except Exception as e:
-        st.error(f"Error preparing data: {str(e)}")
+        st.error(f"Error processing data: {str(e)}")
         return None
 
 
