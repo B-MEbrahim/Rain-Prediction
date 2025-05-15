@@ -25,8 +25,10 @@ with header_col1:
 with header_col2:
     st.title("About This Project")
     st.markdown("""
-    Welcome to our rainfall prediction dashboard!  
-    Here you can learn more about our goals, our approach, and the tools behind this project.
+    This project aims to predict whether it will rain tomorrow in various Australian locations using
+                historical weather data collected from the Australian Bureau of Meteorology. 
+                Leveraging machine learning, specifically an XGBoost classification model trained on 30 meteorological features
+                (such as temperature, humidity, wind speed, and pressure), the system provides a binary prediction: Rain or No Rain.
     """)
 
 st.markdown("---")
