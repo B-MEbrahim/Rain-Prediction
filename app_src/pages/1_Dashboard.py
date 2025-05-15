@@ -19,7 +19,7 @@ st.set_page_config(
 
 
 def correct_path(path_type, name):
-    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     config_path = os.path.join(repo_root, "configs", "paths.yaml")
 
     with open(config_path, "r") as file:
