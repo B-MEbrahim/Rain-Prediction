@@ -7,8 +7,7 @@ xgboost
 mlflow
 joblib
 requests
-yaml
-os
+PyYAML
 plotly
 streamlit
 streamlit_lottie
