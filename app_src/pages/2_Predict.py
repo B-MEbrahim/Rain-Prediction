@@ -249,9 +249,14 @@ if st.button("Predict Rainfall"):
         # st.dataframe(test_df)
         if test_df is None:
             st.stop()
-            
     try:
-        sample = test_df.iloc[int(selected_day) - 1]
+        sample = test_df.iloc[int(selected_day) - 1]      
+    except Exception as e:
+        st.write("No data available for the selected date")  
+        st.stop()
+
+    try:
+        # sample = test_df.iloc[int(selected_day) - 1]
         if sample.empty:
             st.warning("No data available for the selected date")
             st.stop()
