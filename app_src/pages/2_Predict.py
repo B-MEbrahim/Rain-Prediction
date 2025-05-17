@@ -66,7 +66,7 @@ if st.button("Predict on Random Sample"):
 
     predection_label = "Rain" if predection_class == 1 else "No Rain For Tomorrow!"
 
-    st.subheader("🌤️ Prediction Result")
+    st.subheader("Prediction Result")
     if predection_class == 1:
         st.success(f"**Prediction: Rain 🌧️**\n\n**Confidence:** {predection_proba:.2%}")
     else:
