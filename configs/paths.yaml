@@ -6,6 +6,7 @@ dirs:
   processed_data_dir: data/processed
   fetched_data: data/fetched
   artifacts_dir: artifacts
+  feedback_data: data/feedback
 
 data_paths:
   raw_data_path: data/raw/weatherAUS.csv
@@ -13,6 +14,7 @@ data_paths:
   cleaned_data_path: data/processed/cleaned_data.csv
   test_data_path: data\processed\dummy.csv
   cleaned_dashboard_data: data\processed\cleaned_rain_data.csv
+  feedback_data_path: data/feedback/user_feedback.csv
    
 
 artifacts_paths:
