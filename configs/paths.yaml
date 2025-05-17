@@ -11,7 +11,7 @@ data_paths:
   raw_data_path: data/raw/weatherAUS.csv
   xg_processed_data_path: data\processed\xg_weatherAUS_processed.csv
   cleaned_data_path: data/processed/cleaned_data.csv
-  test_data_path: data\processed\test_dataset.csv
+  test_data_path: data\processed\dummy.csv
   cleaned_dashboard_data: data\processed\cleaned_rain_data.csv
    
 
