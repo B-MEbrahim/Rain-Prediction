@@ -60,8 +60,9 @@ if st.button("Predict on Random Sample"):
         st.dataframe(sample.T, use_container_width=True)
     
 
-    predection_class = model.predict(sample)[0]
     predection_proba = model.predict_proba(sample)[0][1]
+    threshold = 0.53
+    predection_class = 1 if predection_proba >= threshold else 0
 
     predection_label = "Rain" if predection_class == 1 else "No Rain For Tomorrow!"
 
