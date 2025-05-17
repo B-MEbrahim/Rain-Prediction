@@ -1,14 +1,22 @@
 model:
   name: xgboost
   hparams:
-    eta : 0.1,
-    n_estimators : 100,
-    enable_categorical : True,
-    scale_pos_weight : 3,
-    gamma : 1,
-    max_depth : 6,
-    min_child_weight : 2,
-    reg_lambda : 2,
-    reg_alpha : 2,
-    subsample : 1,
+    eta : 0.1
+    n_estimators : 100
+    enable_categorical : True
+    scale_pos_weight : 3
+    gamma : 1
+    max_depth : 6
+    min_child_weight : 2
+    reg_lambda : 2
+    reg_alpha : 2
+    subsample : 1
     colsample_bytree : 0.82
+
+  name: DecisionTree
+  hparams:
+    criterion : 'entropy'     
+    max_depth : 2            
+    min_samples_leaf : 1   
+    min_samples_split : 2 
+    random_state : 42
