@@ -27,15 +27,6 @@ def correct_path(path_type, name):
     return full_path
 
 
-# # Handle navigation via query parameters
-# if "page" in st.query_params:
-#     selected = st.query_params["page"]
-#     if selected == "Predict":
-#         st.write("Redirecting to Predict Page...")  # Placeholder
-#     elif selected == "EDA":
-#         st.write("Redirecting to Dashboard Page...")
-#     elif selected == "About":
-#         st.write("Redirecting to Team Page...")
 
 # Welcome and intro
 with st.container():
@@ -46,16 +37,7 @@ with st.container():
     </div>
     """, unsafe_allow_html=True)
 
-    # st.title("Australian Rainfall Prediction")
-    # st.markdown("""
-    # This platform leverages advanced machine learning models to accurately predict rainfall levels across Australia.
-    # Our models are trained on historical weather data and use cutting-edge techniques for forecasting weather patterns.
-    # """)
-
-    # if st.button("Get Started →"):
-    #     st.query_params["page"] = "EDA"
-
-#
+    
 
 # Load animation
 hero_animation = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_sk5h1kfn.json")
@@ -117,8 +99,7 @@ with col1:
     Our models are trained on historical weather data and use cutting-edge techniques for forecasting weather patterns.
     """)
 
-    # if st.button("Get Started →"):
-    #     st.query_params["page"] = "EDA"
+
 
 with col2:
     if hero_animation:
@@ -149,15 +130,5 @@ for col, (title, desc) in zip(step_cols, steps):
         </div>
         """, unsafe_allow_html=True)
 
-# # CTA section
-# st.markdown("## Explore More")
-# cta_cols = st.columns(3)
-# with cta_cols[0]:
-#     if st.button(" Predict Rainfall"):
-#         st.query_params["page"] = "Predict"
-# with cta_cols[1]:
-#     if st.button("Dashboard"):
-#         st.query_params["page"] = "EDA"
-# with cta_cols[2]:
-#     if st.button("Meet The Team"):
-#         st.query_params["page"] = "About"
+
+
