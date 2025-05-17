@@ -187,6 +187,16 @@ def prepare_data():
 
         df['RainToday'] = df['Rainfall'].apply(lambda x: 1 if pd.notnull(x) and x > 0 else 0)
 
+        # Add this before your feature engineering
+        numeric_cols = ['MinTemp', 'MaxTemp', 'Rainfall', 'Evaporation', 'Sunshine', 
+                'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm', 'Humidity9am', 
+                'Humidity3pm', 'Pressure9am', 'Pressure3pm', 'Cloud9am', 
+                'Cloud3pm', 'Temp9am', 'Temp3pm']
+
+        for col in numeric_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')  # Convert to float, invalid→NaN
+                
         # Convert Date column to datetime
         df['Date'] = pd.to_datetime(df['Date'])
 
@@ -213,7 +223,7 @@ def prepare_data():
              'WindGustDiff']]
         
         df.drop(columns=['Date'], inplace=True)
-
+        
         cat_cols = df.select_dtypes(include=['object']).columns
         for col in cat_cols:
             df[col] = df[col].astype('category')
