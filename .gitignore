@@ -1,4 +1,5 @@
 data/processed/**/*.csv
 !data/processed/cleaned_rain_data.csv
 data/raw/**/*.csv
+data/feedback/
 #artifacts/videos/*.mp4
