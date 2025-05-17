@@ -7,12 +7,25 @@ import random
 
 
 def correct_path(path_type, name):
-    config_path = os.path.join("..", "configs", "paths.yaml")
+    # Try different approaches to find the root
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    
+    # Debugging - print paths to check where we are
+    print("Current directory:", os.path.dirname(__file__))
+    print("Repo root:", repo_root)
+    
+    config_path = os.path.join(repo_root, "configs", "paths.yaml")
+    
+    # Check if file exists
+    if not os.path.exists(config_path):
+        st.error(f"Config file not found at: {config_path}")
+        return None
+    
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
-    
+
     path = config[path_type][name]
-    full_path = os.path.join("..", path.replace("\\", "/"))
+    full_path = os.path.join(repo_root, path.replace("\\", "/"))
     return full_path
 
 
@@ -37,7 +50,7 @@ model = load_model()
 test_df = test_data()
 
 
-st.title("🔮 Rainfall Predictor")
+st.title("Rainfall Predictor")
 st.write("Click the button below to load a random test sample and predict if it will rain or not.")
 
 

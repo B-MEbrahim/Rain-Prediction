@@ -4,14 +4,22 @@ dirs:
   config_dir: confgs
   raw_data_dir: data/raw
   processed_data_dir: data/processed
+  fetched_data: data/fetched
   artifacts_dir: artifacts
+  feedback_data: data/feedback
 
 data_paths:
   raw_data_path: data/raw/weatherAUS.csv
   xg_processed_data_path: data\processed\xg_weatherAUS_processed.csv
   cleaned_data_path: data/processed/cleaned_data.csv
-  test_data_path: data\processed\test_dataset.csv
+  test_data_path: data\processed\dummy.csv
+  cleaned_dashboard_data: data\processed\cleaned_rain_data.csv
+  feedback_data_path: data/feedback/user_feedback.csv
    
 
 artifacts_paths:
   xg_model_path: models/xgboost_model.pkl
+  DT_model_path: models/Decision_Tree.pkl
+  video_path: artifacts\videos\Rain Predict.mp4
+  style_path: artifacts\css\style.css
+  styles_path: artifacts\css\styles.css

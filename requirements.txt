@@ -5,3 +5,10 @@ seaborn
 scikit-learn
 xgboost
 mlflow
+joblib
+requests
+PyYAML
+plotly
+streamlit
+streamlit_lottie
+statsmodels
