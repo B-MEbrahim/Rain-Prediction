@@ -108,8 +108,8 @@ with col2:
         st.warning("Animation failed to load. Check connection or try later.")
 
 # Video section
-video_path = correct_path("artifacts_paths", "video_path")
-st.video(video_path)
+gif_path = correct_path("artifacts_paths", "gif_path")
+st.image(gif_path)
 
 # How it works section
 st.markdown("## How Our Prediction System Works")
