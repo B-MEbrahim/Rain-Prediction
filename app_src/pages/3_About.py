@@ -70,7 +70,6 @@ with method_cols[3]:
 st.markdown("---")
 
 # -------------- Tools Used Section --------------
-# -------------- Tools Used Section --------------
 st.subheader("Tools Used")
 
 tools = {
@@ -103,6 +102,16 @@ for col, (name, logo) in zip(tool_cols, tools.items()):
             <span style='font-size:16px'>{name}</span>
         </div>
         """, unsafe_allow_html=True)
+
+
+# -------------- Data Section --------------
+st.markdown("---")
+# Data Source / Citation section
+st.markdown("## Data Source")
+st.markdown("""
+This project uses the [Australian weather dataset](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package) available on Kaggle, originally provided by Joseph Young.
+""", unsafe_allow_html=True)
+
 
 st.markdown("---")
 # -------------- Contact Section --------------
