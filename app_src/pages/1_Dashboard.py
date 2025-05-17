@@ -116,22 +116,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# the video is in the home page.
-# video_path = correct_path("artifacts_paths", r"video_path")
 
-# # check if video exists
-# if os.path.exists(video_path):
-#     html_code = f"""
-#     <video width="100%" height="auto" autoplay loop muted>
-#         <source src="file:///{video_path}" type="video/mp4">
-#         Your browser does not support the video tag.
-#     </video>
-#     """
-#     components.html(html_code)
-# else:
-#     st.error("Error loading the video.")
-# --- Map section (first) ---
-# --- Geographic Distribution Section ---
 # --- Geographic Distribution Section ---
 st.markdown("---")
 with st.expander(" Geographic Distribution", expanded=True):
@@ -237,13 +222,6 @@ else:
                     labels={'month': 'Month', 'Rainfall': 'Average Rainfall (mm)'}
                 )
                 st.plotly_chart(fig, use_container_width=True)
-            # with tab3:
-            #     fig = px.sunburst(
-            #         filtered_df,
-            #         path=['RainToday', 'RainTomorrow'],
-            #         title="Rain Today vs Rain Tomorrow"
-            #     )
-            #     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")
     
@@ -271,7 +249,7 @@ else:
                 y=filtered_df[filtered_df['Location'] == location]['MaxTemp'],
                 name=location,
                 marker=dict(color=color_map[location]),
-                boxpoints=False  # Hide individual outlier points
+                boxpoints=False  
             ))
 
         fig.update_layout(
@@ -283,7 +261,7 @@ else:
 
     st.markdown("---")
     st.markdown("##  Wind Analysis")
-    # with st.expander("Wind Direction and Speed"):
+    
     col1, col2 = st.columns(2)
     with col1:
             fig = px.bar_polar(
