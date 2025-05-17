@@ -95,6 +95,8 @@ min_date = min_date.replace(day=1)
 max_date = today
 
 # User input with date restrictions
+st.info("You can only select data from the **most recent 14 months**.")
+
 col1, col2 = st.columns(2)
 with col1:
     selected_date = st.date_input("Select a date", value=today, min_value=min_date, max_value=max_date)
@@ -289,3 +291,9 @@ if st.button("Predict Rainfall"):
             
     except Exception as e:
         st.write(f"Prediction failed: {str(e)}")
+
+st.markdown("---")
+st.markdown(
+    "**Data Source:** Rainfall and weather data used in this application is collected from the [Bureau of Meteorology (BoM)](http://www.bom.gov.au/climate/data/).",
+    unsafe_allow_html=True
+)
