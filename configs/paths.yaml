@@ -17,6 +17,7 @@ data_paths:
 
 artifacts_paths:
   xg_model_path: models/xgboost_model.pkl
+  DT_model_path: models/Decision_Tree.pkl
   video_path: artifacts\videos\Rain Predict.mp4
   style_path: artifacts\css\style.css
   styles_path: artifacts\css\styles.css
