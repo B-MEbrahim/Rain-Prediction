@@ -4,6 +4,7 @@ import requests
 import joblib
 import yaml
 import os
+import datetime
 
 
 
@@ -80,15 +81,23 @@ def load_model():
     return model
 
 # user input
+# Calculate the minimum and maximum selectable dates
+today = datetime.date.today()
+min_date = today - datetime.timedelta(days=395)  # Approximately 13 months ago
+min_date = min_date.replace(day=1)
+max_date = today
+
+# User input with date restrictions
 col1, col2 = st.columns(2)
 with col1:
-    selected_date = st.date_input("Select a date", pd.to_datetime("today"))
+    selected_date = st.date_input("Select a date", value=today, min_value=min_date, max_value=max_date)
 with col2:
     selected_location = st.selectbox("Select a location", list(location_id.keys()))
 
 selected_year = selected_date.strftime("%Y")
 selected_month = selected_date.strftime("%m")
 selected_day = selected_date.strftime("%d")
+
 
 # fetch data
 def fetch_data():
@@ -136,11 +145,11 @@ def prepare_csv():
         return False
 
 
-@st.cache_data
+
 def prepare_data():
     try:
         data_path = os.path.join(correct_path("dirs", "fetched_data"), f"{location_id[selected_location]}_{selected_year}{selected_month}.csv")
-        df = pd.read_csv(data_path, encoding='latin1')
+        df = pd.read_csv(data_path, encoding='latin1', on_bad_lines='warn')
         df.drop(df.columns[0], axis=1, inplace=True)
         df['Location'] = selected_location 
         df.drop(columns=['Time of maximum wind gust'], inplace=True)
@@ -218,22 +227,27 @@ if st.button("Predict Rainfall"):
             st.stop()
             
         test_df = prepare_data()
+        # st.dataframe(test_df)
         if test_df is None:
             st.stop()
             
     try:
-        sample = test_df.loc[(test_df['year'] == int(selected_year)) & 
-                            (test_df['month'] == int(selected_month)) & 
-                            (test_df['day'] == int(selected_day))]
+        sample = test_df.iloc[int(selected_day) - 1]
+        st.dataframe(sample)
         if sample.empty:
             st.warning("No data available for the selected date")
             st.stop()
             
         with st.expander("Sample Features:"):
+            if isinstance(sample, pd.Series):
+                sample = sample.to_frame().T
+            
+            # displaying sample features
             display_df = sample.copy()
             cat_cols = display_df.select_dtypes(include=['category']).columns
             for col in cat_cols:
                 display_df[col] = display_df[col].astype(str)
+
             problem_columns = ['WindGustDir', 'WindDir9am', 'WindDir3pm']
             display_df[problem_columns] = display_df[problem_columns].astype(str)
             
@@ -242,6 +256,11 @@ if st.button("Predict Rainfall"):
             transposed.columns = ['Feature', 'Value']
             st.dataframe(transposed, use_container_width=True)
         
+        # prepare tha data for the model
+        cat_cols = sample.select_dtypes(include=['object'])
+        for col in cat_cols:
+            sample[col] = sample[col].astype('category')
+
         model = load_model()
         prediction_class = model.predict(sample)[0]
         prediction_proba = model.predict_proba(sample)[0][1]
