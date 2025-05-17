@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from streamlit_lottie import st_lottie
 import requests
+import datetime
 
 
 # Page config
@@ -311,9 +312,36 @@ else:
 st.markdown("---")
 # with st.expander(" Data Summary"):
 st.dataframe(filtered_df.describe())
-st.download_button(
-    label="Download Filtered Data (CSV)",
-    data=filtered_df.to_csv(index=False),
-    file_name="filtered_weather_data.csv",
-    mime="text/csv"
-)
+
+st.markdown("---")
+st.header("We value your feedback!")
+
+# Text feedback
+feedback = st.text_area("What did you think about this app?")
+
+# Rating (1 to 5)
+rating = st.slider("Rate your experience:", 1, 5)
+
+
+# Submit button
+if st.button("Submit Feedback"):
+    # Prepare feedback data
+    feedback_data = {
+        "timestamp": datetime.datetime.now().isoformat(),
+        "feedback": feedback,
+        "rating": rating
+    }
+    feedback_df = pd.DataFrame([feedback_data])
+
+    # Define feedback file path (inside the feedbackfolder in the data folder)
+    feedback_file = correct_path("data_paths", "feedback_data_path")
+    os.makedirs(feedback_file, exist_ok=True)
+    feedback_file = os.path.join(feedback_file, "user_feedback.csv")
+
+    # Append feedback to CSV
+    if os.path.exists(feedback_file):
+        feedback_df.to_csv(feedback_file, mode='a', header=False, index=False)
+    else:
+        feedback_df.to_csv(feedback_file, mode='w', header=True, index=False)
+
+    st.success("Thank you for your feedback!")
