@@ -68,7 +68,7 @@ streamlit run app.py
   [https://rain-prediction-xynsjsyukgjsyykngqqgqy.streamlit.app/](https://rain-prediction-xynsjsyukgjsyykngqqgqy.streamlit.app/)
 ## Team Members
 
-- Hassan Abdelrazek 
+- Hassan Abdelrazek (Team leader)
 - Mahmoud Ebrahim  
 - Mohamed Elseragy
 - Ahmed Fouad  
